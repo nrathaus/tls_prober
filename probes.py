@@ -76,7 +76,10 @@ class Probe(object):
                 response += 'error:timeout'
                 break
             except socket.error as e:
-                response += 'error:%s|' % errno.errorcode[e.errno]
+                if e.errno is not None:
+                    response += ('error:%s|' % errno.errorcode[e.errno])
+                else:
+                    response += ('error:%s|' % e.errno)
                 break
             except IOError as e:
                 response += 'error:%s|' % str(e)
@@ -1117,8 +1120,12 @@ class SNIWithDifferentType(NormalHandshake):
     '''Send server name indication with two names, one not of host_name type'''
 
     def make_sni_ext(self, server_names):
-        encoded_names = ''.join(struct.pack('!BH', name_type, len(name))
-                                + name for name_type, name in server_names)
+        encoded_names = b''
+        for name_type, name in server_names:
+            if isinstance(name, str):
+                name = name.encode('utf-8')
+            encoded_names += struct.pack('!BH', name_type, len(name)) + name
+            
         ext_data = struct.pack('!H', len(encoded_names)) + encoded_names
         return Extension.create(extension_type=Extension.ServerName,
                                 data=ext_data)
