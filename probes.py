@@ -15,7 +15,7 @@ else:
 if platform.system() != 'Java':
     import socks
 else:
-    if os.environ.has_key('socks_proxy'):
+    if 'socks_proxy' in os.environ:
         logging.warn('Unable to honour socks_proxy environment variable, unsupported in Jython')
 
 from prober_utils import *
@@ -38,7 +38,7 @@ class Probe(object):
     def connect(self, ipaddress, port, starttls_mode):
         self.ipaddress = ipaddress
         # Check if we're using socks
-        if os.environ.has_key('socks_proxy'):
+        if 'socks_proxy' in os.environ:
             socks_host, socks_port = os.environ['socks_proxy'].split(':')
             s = socks.socksocket()
             s.setproxy(socks.PROXY_TYPE_SOCKS5, socks_host, int(socks_port))
@@ -51,7 +51,7 @@ class Probe(object):
         # Do starttls if relevant
         starttls(s, port, starttls_mode)
             
-        return s.makefile('rw', 0)
+        return s.makefile('rwb', 0)
 
     def test(self, sock):
         pass
@@ -72,13 +72,13 @@ class Probe(object):
             try:
                 record = read_tls_record(sock)
                 response += '*(%x)' % record.version() # TODO: Not sure that recording the record layer version is worth it?
-            except socket.timeout, e:
+            except socket.timeout as _:
                 response += 'error:timeout'
                 break
-            except socket.error, e:
+            except socket.error as e:
                 response += 'error:%s|' % errno.errorcode[e.errno]
                 break
-            except IOError, e:
+            except IOError as e:
                 response += 'error:%s|' % str(e)
                 break
         
@@ -110,7 +110,7 @@ class Probe(object):
                 else:
                     response += 'alert:%s:warning|' % alert.alert_types[alert.alert_type()]
             else:
-                if record.content_types.has_key(record.content_type()):
+                if record.content_type() in record.content_types:
                     response += 'record:%s|' % record.content_types[record.content_type()]
                 else:
                     response += 'record:type(%x)|' % record.content_type()
@@ -124,10 +124,10 @@ class Probe(object):
         sock = self.connect(ipaddress, port, starttls)
         try:
             result = self.test(sock)
-        except socket.timeout, e:
+        except socket.timeout:
             result = 'writeerror:timeout'
             return result
-        except socket.error, e:
+        except socket.error as e:
             result = 'writeerror:%s|' % errno.errorcode[e.errno]
             return result
 
@@ -557,7 +557,7 @@ class Heartbeat(NormalHandshake):
 
     def make_heartbeat(self):
         heartbeat = HeartbeatMessage.create(HeartbeatMessage.HeartbeatRequest,
-                                            'XXXX')
+                                            b'XXXX')
 
         record = TLSRecord.create(content_type=TLSRecord.Heartbeat,
                                   version=self.record_version,
@@ -591,7 +591,7 @@ class Heartbleed(Heartbeat):
 
     def make_heartbeat(self):
         heartbeat = HeartbeatMessage.create(HeartbeatMessage.HeartbeatRequest,
-                                            'XXXX', 0x4000)
+                                            b'XXXX', 0x4000)
 
         record = TLSRecord.create(content_type=TLSRecord.Heartbeat,
                                   version=self.record_version,
@@ -843,10 +843,10 @@ class RecordLengthUnderflow(Probe):
         logging.debug('Sending Client Hello...')
         try:
             sock.write(self.make_record_length_underflow())
-        except socket.timeout, e:
+        except socket.timeout as _:
             result = 'writeerror:timeout'
             return result
-        except socket.error, e:
+        except socket.error as e:
             result = 'writeerror:%s|' % errno.errorcode[e.errno]
             return result
 
@@ -886,13 +886,13 @@ class TwoInvalidPackets(Probe):
         logging.debug('Sending split hello...')
         part_one = '<tls.record.TLSRecord object at 0x7fd2dc0906d0>'
         part_two = '<tls.record.TLSRecord object at 0x7fd2dc090690>'
-        sock.write(part_one)
+        sock.write(part_one.encode('utf-8'))
         try:
-            sock.write(part_two)
-        except socket.timeout, e:
+            sock.write(part_two.encode('utf-8'))
+        except socket.timeout as _:
             result = 'writeerror:timeout'
             return result
-        except socket.error, e:
+        except socket.error as e:
             result = 'writeerror:%s|' % errno.errorcode[e.errno]
             return result
 
@@ -924,10 +924,10 @@ class SplitHelloRecords(Probe):
         sock.write(part_one)
         try:
             sock.write(part_two)
-        except socket.timeout, e:
+        except socket.timeout as _:
             result = 'writeerror:timeout'
             return result
-        except socket.error, e:
+        except socket.error as e:
             result = 'writeerror:%s|' % errno.errorcode[e.errno]
             return result
 

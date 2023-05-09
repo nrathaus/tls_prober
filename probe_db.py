@@ -94,15 +94,15 @@ if __name__ == '__main__':
     database = read_database()
 
     for fingerprint in database:
-        print 'Description:'
-        print fingerprint.description()
-        print 'Metadata:'
-        print fingerprint.metadata
-        print 'Probes:'
-        print fingerprint.probes
+        print ('Description:')
+        print (fingerprint.description())
+        print ('Metadata:')
+        print (fingerprint.metadata)
+        print ('Probes:')
+        print (fingerprint.probes)
 
 
     matches = find_matches(database[0].probes)
-    print matches
+    print (matches)
 
 

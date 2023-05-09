@@ -342,9 +342,9 @@ def probe(ipaddress, port, starttls):
 def list_probes():
     for probe in probes:
         if type(probe).__doc__ is None:
-            print type(probe).__name__
+            print (type(probe).__name__)
         else:
-            print '%s: %s' % (type(probe).__name__, type(probe).__doc__)
+            print ('%s: %s' % (type(probe).__name__, type(probe).__doc__))
 
 def probe_strength(db, raw_scores):
     # return how diverse are the expected results of probes in the
@@ -449,7 +449,7 @@ def main():
     opts, args = options.parse_args()
 
     if opts.version:
-        print 'TLS Prober version %s, %s <%s>' % (__version__, __author__, __email__)
+        print ('TLS Prober version %s, %s <%s>' % (__version__, __author__, __email__))
         return
 
     if opts.list_probes:
@@ -469,22 +469,22 @@ def main():
     elif opts.add or opts.thorough:
         results = probe(args[0], opts.port, opts.starttls)
     else:
-        print 'Running quick scan, results may be unreliable...'
+        print ('Running quick scan, results may be unreliable...')
         db = probe_db.read_database()
         results = quick_probe(args[0], opts.port, opts.starttls, db)
 
     # Add a fingerprint to the db
     if opts.add:
         filename = probe_db.add_fingerprint(opts.add, results)
-        print 'Added %s to the database' % opts.add
-        print 'The fingerprint is located at:', filename
-        print 'Please submit your new fingerprint for inclusion in the next release!'
+        print ('Added %s to the database' % opts.add)
+        print ('The fingerprint is located at:', filename)
+        print ('Please submit your new fingerprint for inclusion in the next release!')
         return
     
     # Print the results of the probe
     if opts.list:
         for key, val in sorted(results.items()):
-            print '%24s:\t%s' % (key, val)
+            print ('%24s:\t%s' % (key, val))
         return
     
     # Print the matches
