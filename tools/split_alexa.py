@@ -4,11 +4,11 @@ import sys
 
 max = 14000
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     f = open(sys.argv[1])
 
     chunk = 0
-    count = max+1
+    count = max + 1
     out = None
 
     for line in f:
@@ -17,7 +17,7 @@ if __name__ == '__main__':
                 out.close()
             count = 0
             chunk += 1
-            out = open('chunk-'+str(chunk), 'w')
-        
+            out = open("chunk-" + str(chunk), "w")
+
         out.write(line)
         count += 1

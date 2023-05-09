@@ -1,7 +1,8 @@
 import sys
 import os
+
 # Ensure we can see the pytls/tls subdir for the pytls submodule
-sys.path.insert(1, os.path.join(os.path.dirname(__file__), '..', 'pytls'))
+sys.path.insert(1, os.path.join(os.path.dirname(__file__), "..", "pytls"))
 try:
     import unittest2 as unittest
 except ImportError:
@@ -27,152 +28,145 @@ class MockSock(object):
     def flush(self):
         pass
 
-DEFAULT_CIPHERS_STR = b'\x00\x04\x00\x05\x00\n\x00/\x005\x00<\x00='
+
+DEFAULT_CIPHERS_STR = b"\x00\x04\x00\x05\x00\n\x00/\x005\x00<\x00="
 
 
-DEFAULT_PFS_CIPHERS_STR = (b"\xc0,"
-                           b"\xc0+"
-                           b"\xc0$"
-                           b"\xc0#"
-                           b"\xc0\n"
-                           b"\xc0\t"
-                           b"\xc00"
-                           b"\xc0/"
-                           b"\xc0("
-                           b"\xc0'"
-                           b"\xc0\x14"
-                           b"\xc0\x13"
-                           b"\x00\x9f"
-                           b"\x00\x9e"
-                           b"\x00k"
-                           b"\x00g"
-                           b"\x009"
-                           b"\x003"
-                           b"\xcc\xa9"
-                           b"\xcc\xa2"
-                           b"\xcc\x14"
-                           b"\xcc\xa8"
-                           b"\xcc\xa1"
-                           b"\xcc\x13"
-                           b"\xcc\xaa"
-                           b"\xcc\xa3"
-                           b"\xcc\x15"
-                           b"\xc0\xad"
-                           b"\xc0\xac"
-                           b"\xc0\xaf"
-                           b"\xc0\xae"
-                           b"\xc0\x9f"
-                           b"\xc0\x9e"
-                           b"\xc0\xa3"
-                           b"\xc0\xa2"
-                           b"\xc0\x07"
-                           b"\xc0\x08"
-                           b"\xc0s"
-                           b"\xc0H"
-                           b"\xc0\x11"
-                           b"\xc0\x12"
-                           b"\xc0w"
-                           b"\xc0M"
-                           b"\x00\x88"
-                           b"\x00\x16"
-                           b"\x00\x9a"
-                           b"\xc0D")
+DEFAULT_PFS_CIPHERS_STR = (
+    b"\xc0,"
+    b"\xc0+"
+    b"\xc0$"
+    b"\xc0#"
+    b"\xc0\n"
+    b"\xc0\t"
+    b"\xc00"
+    b"\xc0/"
+    b"\xc0("
+    b"\xc0'"
+    b"\xc0\x14"
+    b"\xc0\x13"
+    b"\x00\x9f"
+    b"\x00\x9e"
+    b"\x00k"
+    b"\x00g"
+    b"\x009"
+    b"\x003"
+    b"\xcc\xa9"
+    b"\xcc\xa2"
+    b"\xcc\x14"
+    b"\xcc\xa8"
+    b"\xcc\xa1"
+    b"\xcc\x13"
+    b"\xcc\xaa"
+    b"\xcc\xa3"
+    b"\xcc\x15"
+    b"\xc0\xad"
+    b"\xc0\xac"
+    b"\xc0\xaf"
+    b"\xc0\xae"
+    b"\xc0\x9f"
+    b"\xc0\x9e"
+    b"\xc0\xa3"
+    b"\xc0\xa2"
+    b"\xc0\x07"
+    b"\xc0\x08"
+    b"\xc0s"
+    b"\xc0H"
+    b"\xc0\x11"
+    b"\xc0\x12"
+    b"\xc0w"
+    b"\xc0M"
+    b"\x00\x88"
+    b"\x00\x16"
+    b"\x00\x9a"
+    b"\xc0D"
+)
 
 
-DEFAULT_12_CIPHERS_STR = (b'\x00\x04'
-                          b'\x00\x05'
-                          b'\x00\n'
-                          b'\x00/'
-                          b'\x005'
-                          b'\x00<'
-                          b'\x00='
-                          b'\x00\x9c'
-                          b'\x00\x9d'
-                          b'\xcc\xa0'
-                          b'\xc0\x9c'
-                          b'\xc0\x9d'
-                          b'\xc0\xa0'
-                          b'\xc0\xa1'
-                          b'\x00A'
-                          b'\x00\x84'
-                          b'\x00\xba'
-                          b'\xc0<'
-                          b'\x00\x96')
+DEFAULT_12_CIPHERS_STR = (
+    b"\x00\x04"
+    b"\x00\x05"
+    b"\x00\n"
+    b"\x00/"
+    b"\x005"
+    b"\x00<"
+    b"\x00="
+    b"\x00\x9c"
+    b"\x00\x9d"
+    b"\xcc\xa0"
+    b"\xc0\x9c"
+    b"\xc0\x9d"
+    b"\xc0\xa0"
+    b"\xc0\xa1"
+    b"\x00A"
+    b"\x00\x84"
+    b"\x00\xba"
+    b"\xc0<"
+    b"\x00\x96"
+)
 
 
-RANDOM_STR = b'01234567890123456789012345678901'
+RANDOM_STR = b"01234567890123456789012345678901"
 
 
-MAKE_HELLO_EMPTY_EXT = (b'\x16\x03\x01\x00;'
-                        b'\x01\x00\x007\x03\x01' +
-                        RANDOM_STR +
-                        b'\x00'
-                        b'\x00\x0e' +
-                        DEFAULT_CIPHERS_STR +
-                        b'\x01\x00'
-                        b'\x00\x00')
+MAKE_HELLO_EMPTY_EXT = (
+    b"\x16\x03\x01\x00;"
+    b"\x01\x00\x007\x03\x01" + RANDOM_STR + b"\x00"
+    b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
 assert len(MAKE_HELLO_EMPTY_EXT) == 64, len(MAKE_HELLO_EMPTY_EXT)
 
-MAKE_PFS_HELLO_EMPTY_EXT = (b"\x16\x03\x01\x00\x8b"
-                            b"\x01\x00\x00\x87"
-                            b"\x03\x01" +
-                            RANDOM_STR +
-                            b"\x00"
-                            b"\x00^" +
-                            DEFAULT_PFS_CIPHERS_STR +
-                            b"\x01\x00"
-                            b"\x00\x00")
+MAKE_PFS_HELLO_EMPTY_EXT = (
+    b"\x16\x03\x01\x00\x8b"
+    b"\x01\x00\x00\x87"
+    b"\x03\x01" + RANDOM_STR + b"\x00"
+    b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
 
-MAKE_11_HELLO_EMPTY_STR = (b'\x16\x03\x01\x00S'
-                           b'\x01\x00\x00O'
-                           b'\x03\x02' +
-                           RANDOM_STR +
-                           b'\x00'
-                           b'\x00&' +
-                           DEFAULT_12_CIPHERS_STR +
-                           b'\x01\x00'
-                           b'\x00\x00')
+MAKE_11_HELLO_EMPTY_STR = (
+    b"\x16\x03\x01\x00S"
+    b"\x01\x00\x00O"
+    b"\x03\x02" + RANDOM_STR + b"\x00"
+    b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
 
-MAKE_11_PFS_HELLO_EMPTY_STR = (b"\x16\x03\x01\x00\x8b"
-                               b"\x01\x00\x00\x87"
-                               b"\x03\x02" +
-                               RANDOM_STR +
-                               b"\x00"
-                               b"\x00^" +
-                               DEFAULT_PFS_CIPHERS_STR +
-                               b"\x01\x00"
-                               b"\x00\x00")
+MAKE_11_PFS_HELLO_EMPTY_STR = (
+    b"\x16\x03\x01\x00\x8b"
+    b"\x01\x00\x00\x87"
+    b"\x03\x02" + RANDOM_STR + b"\x00"
+    b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
 
-MAKE_12_HELLO_EMPTY_STR = (b'\x16\x03\x01\x00S'
-                           b'\x01\x00\x00O'
-                           b'\x03\x03' +
-                           RANDOM_STR +
-                           b'\x00'
-                           b'\x00&' +
-                           DEFAULT_12_CIPHERS_STR +
-                           b'\x01\x00'
-                           b'\x00\x00')
+MAKE_12_HELLO_EMPTY_STR = (
+    b"\x16\x03\x01\x00S"
+    b"\x01\x00\x00O"
+    b"\x03\x03" + RANDOM_STR + b"\x00"
+    b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
 
 assert len(MAKE_12_HELLO_EMPTY_STR) == 88, len(MAKE_12_HELLO_EMPTY_STR)
 
 
-MAKE_12_PFS_HELLO_EMPTY_STR = (b"\x16\x03\x01\x00\x8b"
-                               b"\x01\x00\x00\x87"
-                               b"\x03\x03" +
-                               RANDOM_STR +
-                               b"\x00"
-                               b"\x00^" +
-                               DEFAULT_PFS_CIPHERS_STR +
-                               b"\x01\x00"
-                               b"\x00\x00")
+MAKE_12_PFS_HELLO_EMPTY_STR = (
+    b"\x16\x03\x01\x00\x8b"
+    b"\x01\x00\x00\x87"
+    b"\x03\x03" + RANDOM_STR + b"\x00"
+    b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+    b"\x00\x00"
+)
 
-assert len(MAKE_12_PFS_HELLO_EMPTY_STR) == 144,\
-        len(MAKE_12_PFS_HELLO_EMPTY_STR)
+assert len(MAKE_12_PFS_HELLO_EMPTY_STR) == 144, len(MAKE_12_PFS_HELLO_EMPTY_STR)
+
 
 class TestNormalHandshake(unittest.TestCase):
     def test_test(self):
@@ -181,8 +175,7 @@ class TestNormalHandshake(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT])
+        self.assertEqual(sock.sent_data, [MAKE_HELLO_EMPTY_EXT])
 
 
 class TestNormalHandshakePFS(unittest.TestCase):
@@ -192,8 +185,7 @@ class TestNormalHandshakePFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_PFS_HELLO_EMPTY_EXT])
+        self.assertEqual(sock.sent_data, [MAKE_PFS_HELLO_EMPTY_EXT])
 
 
 class TestNormalHandshake11(unittest.TestCase):
@@ -203,8 +195,7 @@ class TestNormalHandshake11(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_11_HELLO_EMPTY_STR])
+        self.assertEqual(sock.sent_data, [MAKE_11_HELLO_EMPTY_STR])
 
 
 class TestNormalHandshake11PFS(unittest.TestCase):
@@ -214,8 +205,7 @@ class TestNormalHandshake11PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_11_PFS_HELLO_EMPTY_STR])
+        self.assertEqual(sock.sent_data, [MAKE_11_PFS_HELLO_EMPTY_STR])
 
 
 class TestNormalHandshake12(unittest.TestCase):
@@ -225,8 +215,7 @@ class TestNormalHandshake12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR])
+        self.assertEqual(sock.sent_data, [MAKE_12_HELLO_EMPTY_STR])
 
 
 class TestNormalHandshake12PFS(unittest.TestCase):
@@ -236,8 +225,7 @@ class TestNormalHandshake12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR])
+        self.assertEqual(sock.sent_data, [MAKE_12_PFS_HELLO_EMPTY_STR])
 
 
 class Test(unittest.TestCase):
@@ -247,16 +235,16 @@ class Test(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8b"
-                          b"\x01\x00\x00\x87"
-                          b"\x03\x04" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b"\x00\x00"])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\x03\x04" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidSessionID(unittest.TestCase):
@@ -266,17 +254,21 @@ class TestInvalidSessionID(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00c'
-                          b'\x01\x00\x00_'
-                          b'\x03\01' +
-                          RANDOM_STR +
-                          b'\x28' +
-                          b'0123456789' * 4 +
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00c"
+                b"\x01\x00\x00_"
+                b"\x03\01"
+                + RANDOM_STR
+                + b"\x28"
+                + b"0123456789" * 4
+                + b"\x00\x0e"
+                + DEFAULT_CIPHERS_STR
+                + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidSessionID12(unittest.TestCase):
@@ -286,17 +278,21 @@ class TestInvalidSessionID12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00{'
-                          b'\x01\x00\x00w'
-                          b'\x03\03' +
-                          RANDOM_STR +
-                          b'\x28' +
-                          b'0123456789' * 4 +
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00{"
+                b"\x01\x00\x00w"
+                b"\x03\03"
+                + RANDOM_STR
+                + b"\x28"
+                + b"0123456789" * 4
+                + b"\x00&"
+                + DEFAULT_12_CIPHERS_STR
+                + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidSessionID12PFS(unittest.TestCase):
@@ -307,17 +303,21 @@ class TestInvalidSessionID12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\xb3'
-                          b'\x01\x00\x00\xaf'
-                          b'\x03\03' +
-                          RANDOM_STR +
-                          b'\x28' +
-                          b'0123456789' * 4 +
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xb3"
+                b"\x01\x00\x00\xaf"
+                b"\x03\03"
+                + RANDOM_STR
+                + b"\x28"
+                + b"0123456789" * 4
+                + b"\x00^"
+                + DEFAULT_PFS_CIPHERS_STR
+                + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidCiphersLength(unittest.TestCase):
@@ -327,16 +327,17 @@ class TestInvalidCiphersLength(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00<'
-                          b'\x01\x00\x008'
-                          b'\x03\01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0f' +
-                          DEFAULT_CIPHERS_STR + b'\x00'
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00<"
+                b"\x01\x00\x008"
+                b"\x03\01" + RANDOM_STR + b"\x00"
+                b"\x00\x0f" + DEFAULT_CIPHERS_STR + b"\x00"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidCiphersLength12(unittest.TestCase):
@@ -347,16 +348,17 @@ class TestInvalidCiphersLength12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00T'
-                          b'\x01\x00\x00P'
-                          b'\x03\03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b"\x00'" +
-                          DEFAULT_12_CIPHERS_STR + b'\x00'
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00T"
+                b"\x01\x00\x00P"
+                b"\x03\03" + RANDOM_STR + b"\x00"
+                b"\x00'" + DEFAULT_12_CIPHERS_STR + b"\x00"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidCiphersLength12PFS(unittest.TestCase):
@@ -367,16 +369,17 @@ class TestInvalidCiphersLength12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x8c'
-                          b'\x01\x00\x00\x88'
-                          b'\x03\03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00_' +
-                          DEFAULT_PFS_CIPHERS_STR + b'\x00'
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8c"
+                b"\x01\x00\x00\x88"
+                b"\x03\03" + RANDOM_STR + b"\x00"
+                b"\x00_" + DEFAULT_PFS_CIPHERS_STR + b"\x00"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestInvalidExtLength(unittest.TestCase):
@@ -386,16 +389,16 @@ class TestInvalidExtLength(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00:'
-                          b'\x01\x00\x006'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00:"
+                b"\x01\x00\x006"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00"
+            ],
+        )
 
 
 class TestInvalidExtLength12(unittest.TestCase):
@@ -405,16 +408,16 @@ class TestInvalidExtLength12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00R'
-                           b'\x01\x00\x00N'
-                           b'\x03\x03' +
-                           RANDOM_STR +
-                           b'\x00'
-                           b'\x00&' +
-                           DEFAULT_12_CIPHERS_STR +
-                           b'\x01\x00'
-                           b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00R"
+                b"\x01\x00\x00N"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00"
+            ],
+        )
 
 
 class TestInvalidExtLength12PFS(unittest.TestCase):
@@ -424,16 +427,16 @@ class TestInvalidExtLength12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8a"
-                          b"\x01\x00\x00\x86"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b"\x00"])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8a"
+                b"\x01\x00\x00\x86"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00"
+            ],
+        )
 
 
 class TestExtensionsUnderflow(unittest.TestCase):
@@ -443,19 +446,19 @@ class TestExtensionsUnderflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00@'
-                          b'\x01\x00\x00<'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x01'
-                          b'\xff\x01'
-                          b'\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00@"
+                b"\x01\x00\x00<"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x01"
+                b"\xff\x01"
+                b"\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestExtensionsUnderflow12(unittest.TestCase):
@@ -465,19 +468,19 @@ class TestExtensionsUnderflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00X'
-                          b'\x01\x00\x00T'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x01'
-                          b'\xff\x01'
-                          b'\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00X"
+                b"\x01\x00\x00T"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x01"
+                b"\xff\x01"
+                b"\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestExtensionsUnderflow12PFS(unittest.TestCase):
@@ -488,19 +491,19 @@ class TestExtensionsUnderflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x90"
-                          b"\x01\x00\x00\x8c"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x01'
-                          b'\xff\x01'
-                          b'\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x90"
+                b"\x01\x00\x00\x8c"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x01"
+                b"\xff\x01"
+                b"\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestEmptyCompression(unittest.TestCase):
@@ -510,16 +513,16 @@ class TestEmptyCompression(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00:'
-                          b'\x01\x00\x006'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00:"
+                b"\x01\x00\x006"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestEmptyCompression12(unittest.TestCase):
@@ -529,16 +532,16 @@ class TestEmptyCompression12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00R'
-                          b'\x01\x00\x00N'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00R"
+                b"\x01\x00\x00N"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestEmptyCompression12PFS(unittest.TestCase):
@@ -548,16 +551,16 @@ class TestEmptyCompression12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8a"
-                          b"\x01\x00\x00\x86"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x00"
-                          b"\x00\x00"])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8a"
+                b"\x01\x00\x00\x86"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestCompressOnly(unittest.TestCase):
@@ -567,16 +570,16 @@ class TestCompressOnly(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00<'
-                          b'\x01\x00\x008'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x02\x01\x40'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00<"
+                b"\x01\x00\x008"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x02\x01\x40"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestCompressOnly12(unittest.TestCase):
@@ -586,16 +589,16 @@ class TestCompressOnly12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00T'
-                          b'\x01\x00\x00P'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x02\x01\x40'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00T"
+                b"\x01\x00\x00P"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x02\x01\x40"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestCompressOnly12PFS(unittest.TestCase):
@@ -605,16 +608,16 @@ class TestCompressOnly12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8c"
-                          b"\x01\x00\x00\x88"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x02\x01\x40"
-                          b"\x00\x00"])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8c"
+                b"\x01\x00\x00\x88"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x02\x01\x40"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestDoubleClientHello(unittest.TestCase):
@@ -624,8 +627,7 @@ class TestDoubleClientHello(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT, MAKE_HELLO_EMPTY_EXT])
+        self.assertEqual(sock.sent_data, [MAKE_HELLO_EMPTY_EXT, MAKE_HELLO_EMPTY_EXT])
 
 
 class TestDoubleClientHello12(unittest.TestCase):
@@ -635,9 +637,9 @@ class TestDoubleClientHello12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR,
-                          MAKE_12_HELLO_EMPTY_STR])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_HELLO_EMPTY_STR, MAKE_12_HELLO_EMPTY_STR]
+        )
 
 
 class TestDoubleClientHello12PFS(unittest.TestCase):
@@ -647,9 +649,9 @@ class TestDoubleClientHello12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR,
-                          MAKE_12_PFS_HELLO_EMPTY_STR])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_PFS_HELLO_EMPTY_STR, MAKE_12_PFS_HELLO_EMPTY_STR]
+        )
 
 
 class TestChangeCipherSpec(unittest.TestCase):
@@ -659,10 +661,9 @@ class TestChangeCipherSpec(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT,
-                          b'\x14\x03\x01\x00\x01'
-                          b'\x01'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_HELLO_EMPTY_EXT, b"\x14\x03\x01\x00\x01" b"\x01"]
+        )
 
 
 class TestChangeCipherSpec12(unittest.TestCase):
@@ -672,10 +673,9 @@ class TestChangeCipherSpec12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR,
-                          b'\x14\x03\x03\x00\x01'
-                          b'\x01'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_HELLO_EMPTY_STR, b"\x14\x03\x03\x00\x01" b"\x01"]
+        )
 
 
 class TestChangeCipherSpec12PFS(unittest.TestCase):
@@ -685,10 +685,10 @@ class TestChangeCipherSpec12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR,
-                          b'\x14\x03\x03\x00\x01'
-                          b'\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [MAKE_12_PFS_HELLO_EMPTY_STR, b"\x14\x03\x03\x00\x01" b"\x01"],
+        )
 
 
 class TestHelloRequest(unittest.TestCase):
@@ -698,10 +698,10 @@ class TestHelloRequest(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT,
-                          b'\x16\x03\x01\x00\x04'
-                          b'\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [MAKE_HELLO_EMPTY_EXT, b"\x16\x03\x01\x00\x04" b"\x00\x00\x00\x00"],
+        )
 
 
 class TestHelloRequest12(unittest.TestCase):
@@ -711,10 +711,10 @@ class TestHelloRequest12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR,
-                          b'\x16\x03\x03\x00\x04'
-                          b'\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [MAKE_12_HELLO_EMPTY_STR, b"\x16\x03\x03\x00\x04" b"\x00\x00\x00\x00"],
+        )
 
 
 class TestHelloRequest12PFS(unittest.TestCase):
@@ -724,10 +724,10 @@ class TestHelloRequest12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR,
-                          b'\x16\x03\x03\x00\x04'
-                          b'\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [MAKE_12_PFS_HELLO_EMPTY_STR, b"\x16\x03\x03\x00\x04" b"\x00\x00\x00\x00"],
+        )
 
 
 class TestEmptyChangeCipherSpec(unittest.TestCase):
@@ -737,9 +737,9 @@ class TestEmptyChangeCipherSpec(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT,
-                          b'\x14\x03\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_HELLO_EMPTY_EXT, b"\x14\x03\x01\x00\x00"]
+        )
 
 
 class TestEmptyChangeCipherSpec12(unittest.TestCase):
@@ -749,9 +749,9 @@ class TestEmptyChangeCipherSpec12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR,
-                          b'\x14\x03\x03\x00\x00'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_HELLO_EMPTY_STR, b"\x14\x03\x03\x00\x00"]
+        )
 
 
 class TestEmptyChangeCipherSpec12PFS(unittest.TestCase):
@@ -761,9 +761,9 @@ class TestEmptyChangeCipherSpec12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR,
-                          b'\x14\x03\x03\x00\x00'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_PFS_HELLO_EMPTY_STR, b"\x14\x03\x03\x00\x00"]
+        )
 
 
 class TestBadHandshakeMessage(unittest.TestCase):
@@ -773,10 +773,9 @@ class TestBadHandshakeMessage(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT,
-                          b'\x16\x03\x01\x00\t'
-                          b'Something'])
+        self.assertEqual(
+            sock.sent_data, [MAKE_HELLO_EMPTY_EXT, b"\x16\x03\x01\x00\t" b"Something"]
+        )
 
 
 class TestEmptyRecord(unittest.TestCase):
@@ -786,9 +785,9 @@ class TestEmptyRecord(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x00',
-                          MAKE_HELLO_EMPTY_EXT])
+        self.assertEqual(
+            sock.sent_data, [b"\x16\x03\x01\x00\x00", MAKE_HELLO_EMPTY_EXT]
+        )
 
 
 class TestSplitHelloPackets(unittest.TestCase):
@@ -798,9 +797,9 @@ class TestSplitHelloPackets(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_HELLO_EMPTY_EXT[:10],
-                          MAKE_HELLO_EMPTY_EXT[10:]])
+        self.assertEqual(
+            sock.sent_data, [MAKE_HELLO_EMPTY_EXT[:10], MAKE_HELLO_EMPTY_EXT[10:]]
+        )
 
 
 class TestSplitHelloPackets12(unittest.TestCase):
@@ -810,9 +809,9 @@ class TestSplitHelloPackets12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_HELLO_EMPTY_STR[:10],
-                          MAKE_12_HELLO_EMPTY_STR[10:]])
+        self.assertEqual(
+            sock.sent_data, [MAKE_12_HELLO_EMPTY_STR[:10], MAKE_12_HELLO_EMPTY_STR[10:]]
+        )
 
 
 class TestSplitHelloPackets12PFS(unittest.TestCase):
@@ -822,9 +821,10 @@ class TestSplitHelloPackets12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [MAKE_12_PFS_HELLO_EMPTY_STR[:10],
-                          MAKE_12_PFS_HELLO_EMPTY_STR[10:]])
+        self.assertEqual(
+            sock.sent_data,
+            [MAKE_12_PFS_HELLO_EMPTY_STR[:10], MAKE_12_PFS_HELLO_EMPTY_STR[10:]],
+        )
 
 
 class TestNoCiphers(unittest.TestCase):
@@ -834,15 +834,17 @@ class TestNoCiphers(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00-'
-                          b'\x01\x00\x00)'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x00'
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00-"
+                b"\x01\x00\x00)"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x00"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestNoCiphers12(unittest.TestCase):
@@ -852,15 +854,17 @@ class TestNoCiphers12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00-'
-                          b'\x01\x00\x00)'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x00'
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00-"
+                b"\x01\x00\x00)"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00\x00"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestTwoInvalidPackets(unittest.TestCase):
@@ -872,10 +876,13 @@ class TestTwoInvalidPackets(unittest.TestCase):
 
         # this is broken because it is replicating the behaviour of old
         # incorrect code
-        self.assertEqual(bytes(sock.sent_data[0])[:32],
-                         b'<tls.record.TLSRecord object at ')
-        self.assertEqual(bytes(sock.sent_data[1])[:32],
-                         b'<tls.record.TLSRecord object at ')
+        self.assertEqual(
+            bytes(sock.sent_data[0])[:32], b"<tls.record.TLSRecord object at "
+        )
+        self.assertEqual(
+            bytes(sock.sent_data[1])[:32], b"<tls.record.TLSRecord object at "
+        )
+
 
 class TestSplitHelloRecords(unittest.TestCase):
     def test_test(self):
@@ -884,18 +891,15 @@ class TestSplitHelloRecords(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\n'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR[:4],
-                          b'\x16\x03\x01\x001' +
-                          RANDOM_STR[4:] +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\n" b"\x01\x00\x007" b"\x03\x01" + RANDOM_STR[:4],
+                b"\x16\x03\x01\x001" + RANDOM_STR[4:] + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00",
+            ],
+        )
 
 
 class TestSplitHelloRecords12(unittest.TestCase):
@@ -905,18 +909,15 @@ class TestSplitHelloRecords12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\n'
-                          b'\x01\x00\x00O'
-                          b'\x03\x03' +
-                          RANDOM_STR[:4],
-                          b'\x16\x03\x01\x00I' +
-                          RANDOM_STR[4:] +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\n" b"\x01\x00\x00O" b"\x03\x03" + RANDOM_STR[:4],
+                b"\x16\x03\x01\x00I" + RANDOM_STR[4:] + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00",
+            ],
+        )
 
 
 class TestSplitHelloRecords12PFS(unittest.TestCase):
@@ -927,18 +928,15 @@ class TestSplitHelloRecords12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\n'
-                          b'\x01\x00\x00\x87'
-                          b'\x03\x03' +
-                          RANDOM_STR[:4],
-                          b'\x16\x03\x01\x00\x81' +
-                          RANDOM_STR[4:] +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\n" b"\x01\x00\x00\x87" b"\x03\x03" + RANDOM_STR[:4],
+                b"\x16\x03\x01\x00\x81" + RANDOM_STR[4:] + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00",
+            ],
+        )
 
 
 class TestOnlyECCipherSuites(unittest.TestCase):
@@ -948,17 +946,19 @@ class TestOnlyECCipherSuites(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00;"
-                          b"\x01\x00\x007"
-                          b"\x03\x01" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00\x0e"
-                          b"\xc0\x0c\xc0\r\xc0\x0e\xc0\x0f"
-                          b"\xc0\x13\xc0\x14\xc0'"
-                          b"\x01\x00"
-                          b"\x00\x00"])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00;"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e"
+                b"\xc0\x0c\xc0\r\xc0\x0e\xc0\x0f"
+                b"\xc0\x13\xc0\x14\xc0'"
+                b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHeartbeat(unittest.TestCase):
@@ -968,20 +968,19 @@ class TestHeartbeat(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00@'
-                          b'\x01\x00\x00<'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x01\x00\x07'
-                          b'\x01\x00\x04XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00@"
+                b"\x01\x00\x00<"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x01\x00\x07" b"\x01\x00\x04XXXX",
+            ],
+        )
 
 
 class TestHeartbeat12(unittest.TestCase):
@@ -991,20 +990,19 @@ class TestHeartbeat12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00X'
-                          b'\x01\x00\x00T'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x03\x00\x07'
-                          b'\x01\x00\x04XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00X"
+                b"\x01\x00\x00T"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x03\x00\x07" b"\x01\x00\x04XXXX",
+            ],
+        )
 
 
 class TestHeartbeat12PFS(unittest.TestCase):
@@ -1015,20 +1013,19 @@ class TestHeartbeat12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x90'
-                          b'\x01\x00\x00\x8c'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x03\x00\x07'
-                          b'\x01\x00\x04XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x90"
+                b"\x01\x00\x00\x8c"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x03\x00\x07" b"\x01\x00\x04XXXX",
+            ],
+        )
 
 
 class TestHeartbleed(unittest.TestCase):
@@ -1038,20 +1035,19 @@ class TestHeartbleed(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00@'
-                          b'\x01\x00\x00<'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x01\x00\x07'
-                          b'\x01@\x00XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00@"
+                b"\x01\x00\x00<"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x01\x00\x07" b"\x01@\x00XXXX",
+            ],
+        )
 
 
 class TestHeartbleed12(unittest.TestCase):
@@ -1061,20 +1057,19 @@ class TestHeartbleed12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00X'
-                          b'\x01\x00\x00T'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x03\x00\x07'
-                          b'\x01@\x00XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00X"
+                b"\x01\x00\x00T"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x03\x00\x07" b"\x01@\x00XXXX",
+            ],
+        )
 
 
 class TestHeartbleed12PFS(unittest.TestCase):
@@ -1085,20 +1080,19 @@ class TestHeartbleed12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x90'
-                          b'\x01\x00\x00\x8c'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x0f'
-                          b'\x00\x01\x01',
-                          b'\x18\x03\x03\x00\x07'
-                          b'\x01@\x00XXXX'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x90"
+                b"\x01\x00\x00\x8c"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x0f"
+                b"\x00\x01\x01",
+                b"\x18\x03\x03\x00\x07" b"\x01@\x00XXXX",
+            ],
+        )
 
 
 class TestHighTLSVersion(unittest.TestCase):
@@ -1108,16 +1102,16 @@ class TestHighTLSVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x04\x00\x00;'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x04\x00\x00;"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHighTLSVersion12(unittest.TestCase):
@@ -1127,16 +1121,16 @@ class TestHighTLSVersion12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x04\x00\x00S'
-                          b'\x01\x00\x00O'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x04\x00\x00S"
+                b"\x01\x00\x00O"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHighTLSVersion12PFS(unittest.TestCase):
@@ -1147,16 +1141,16 @@ class TestHighTLSVersion12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x04\x00\x00\x8b'
-                          b'\x01\x00\x00\x87'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x04\x00\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighTLSVersion(unittest.TestCase):
@@ -1166,16 +1160,16 @@ class TestVeryHighTLSVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\xff\xff\x00;'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\xff\xff\x00;"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighTLSVersion12(unittest.TestCase):
@@ -1185,16 +1179,16 @@ class TestVeryHighTLSVersion12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\xff\xff\x00S'
-                          b'\x01\x00\x00O'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\xff\xff\x00S"
+                b"\x01\x00\x00O"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighTLSVersion12PFS(unittest.TestCase):
@@ -1205,16 +1199,16 @@ class TestVeryHighTLSVersion12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\xff\xff\x00\x8b'
-                          b'\x01\x00\x00\x87'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\xff\xff\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestZeroTLSVersion(unittest.TestCase):
@@ -1224,16 +1218,16 @@ class TestZeroTLSVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x00\x00\x00;'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x00\x00\x00;"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestZeroTLSVersion12(unittest.TestCase):
@@ -1243,16 +1237,16 @@ class TestZeroTLSVersion12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x00\x00\x00S'
-                          b'\x01\x00\x00O'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x00\x00\x00S"
+                b"\x01\x00\x00O"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestZeroTLSVersion12PFS(unittest.TestCase):
@@ -1263,16 +1257,16 @@ class TestZeroTLSVersion12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x00\x00\x00\x8b'
-                          b'\x01\x00\x00\x87'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x00\x00\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHighHelloVersion(unittest.TestCase):
@@ -1282,16 +1276,16 @@ class TestHighHelloVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00;'
-                          b'\x01\x00\x007'
-                          b'\x04\x00' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00;"
+                b"\x01\x00\x007"
+                b"\x04\x00" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHighHelloVersionNew(unittest.TestCase):
@@ -1301,16 +1295,16 @@ class TestHighHelloVersionNew(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00S'
-                          b'\x01\x00\x00O'
-                          b'\x04\x00' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00S"
+                b"\x01\x00\x00O"
+                b"\x04\x00" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestHighHelloVersionPFS(unittest.TestCase):
@@ -1320,16 +1314,16 @@ class TestHighHelloVersionPFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x8b'
-                          b'\x01\x00\x00\x87'
-                          b'\x04\x00' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\x04\x00" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighHelloVersion(unittest.TestCase):
@@ -1339,16 +1333,16 @@ class TestVeryHighHelloVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00;'
-                          b'\x01\x00\x007'
-                          b'\xff\xff' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00;"
+                b"\x01\x00\x007"
+                b"\xff\xff" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighHelloVersionNew(unittest.TestCase):
@@ -1358,16 +1352,16 @@ class TestVeryHighHelloVersionNew(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00S'
-                          b'\x01\x00\x00O'
-                          b'\xff\xff' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00S"
+                b"\x01\x00\x00O"
+                b"\xff\xff" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestVeryHighHelloVersionPFS(unittest.TestCase):
@@ -1377,16 +1371,16 @@ class TestVeryHighHelloVersionPFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x8b'
-                          b'\x01\x00\x00\x87'
-                          b'\xff\xff' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8b"
+                b"\x01\x00\x00\x87"
+                b"\xff\xff" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestZeroHelloVersion(unittest.TestCase):
@@ -1396,16 +1390,16 @@ class TestZeroHelloVersion(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00;'
-                          b'\x01\x00\x007'
-                          b'\x00\x00' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00;"
+                b"\x01\x00\x007"
+                b"\x00\x00" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestBadContentType(unittest.TestCase):
@@ -1415,16 +1409,16 @@ class TestBadContentType(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x11\x03\x01\x00;'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x11\x03\x01\x00;"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00"
+            ],
+        )
 
 
 class TestRecordLengthOverflow(unittest.TestCase):
@@ -1434,9 +1428,7 @@ class TestRecordLengthOverflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x01'
-                          b'\x01'])
+        self.assertEqual(sock.sent_data, [b"\x16\x03\x01\x00\x01" b"\x01"])
 
 
 class TestRecordLengthUnderflow(unittest.TestCase):
@@ -1447,17 +1439,16 @@ class TestRecordLengthUnderflow(unittest.TestCase):
         probe.test(sock)
 
         self.assertEqual(len(sock.sent_data[0]), 65540)
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\xff\xff'
-                          b'\x01\x00\x007'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x00' +
-                          b'\x00' * (65540 - 64)])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\xff\xff"
+                b"\x01\x00\x007"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x00" + b"\x00" * (65540 - 64)
+            ],
+        )
 
 
 class TestEmptyRecord(unittest.TestCase):
@@ -1467,9 +1458,9 @@ class TestEmptyRecord(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x00',
-                          MAKE_HELLO_EMPTY_EXT])
+        self.assertEqual(
+            sock.sent_data, [b"\x16\x03\x01\x00\x00", MAKE_HELLO_EMPTY_EXT]
+        )
 
 
 class TestEmptyRecord12(unittest.TestCase):
@@ -1479,9 +1470,9 @@ class TestEmptyRecord12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x00',
-                          MAKE_12_HELLO_EMPTY_STR])
+        self.assertEqual(
+            sock.sent_data, [b"\x16\x03\x01\x00\x00", MAKE_12_HELLO_EMPTY_STR]
+        )
 
 
 class TestEmptyRecord12PFS(unittest.TestCase):
@@ -1491,9 +1482,9 @@ class TestEmptyRecord12PFS(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x00',
-                          MAKE_12_PFS_HELLO_EMPTY_STR])
+        self.assertEqual(
+            sock.sent_data, [b"\x16\x03\x01\x00\x00", MAKE_12_PFS_HELLO_EMPTY_STR]
+        )
 
 
 class TestSNIWrongName(unittest.TestCase):
@@ -1503,19 +1494,19 @@ class TestSNIWrongName(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00U'
-                          b'\x01\x00\x00Q'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x1a'
-                          b'\x00\x00\x00\x16'
-                          b'\x00\x14\x00\x00'
-                          b'\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00U"
+                b"\x01\x00\x00Q"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1a"
+                b"\x00\x00\x00\x16"
+                b"\x00\x14\x00\x00"
+                b"\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNIWrongName12(unittest.TestCase):
@@ -1526,19 +1517,19 @@ class TestSNIWrongName12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00m'
-                          b'\x01\x00\x00i'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x1a'
-                          b'\x00\x00\x00\x16'
-                          b'\x00\x14\x00\x00'
-                          b'\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00m"
+                b"\x01\x00\x00i"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1a"
+                b"\x00\x00\x00\x16"
+                b"\x00\x14\x00\x00"
+                b"\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNIWrongName12PFS(unittest.TestCase):
@@ -1549,19 +1540,19 @@ class TestSNIWrongName12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\xa5'
-                          b'\x01\x00\x00\xa1'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x1a'
-                          b'\x00\x00\x00\x16'
-                          b'\x00\x14\x00\x00'
-                          b'\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xa5"
+                b"\x01\x00\x00\xa1"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1a"
+                b"\x00\x00\x00\x16"
+                b"\x00\x14\x00\x00"
+                b"\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNILongName(unittest.TestCase):
@@ -1571,18 +1562,18 @@ class TestSNILongName(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x028'
-                          b'\x01\x00\x024'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x01\xfd'
-                          b'\x00\x00\x01\xf9'
-                          b'\x01\xf7\x00\x01\xf4' + b'x'*500])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x028"
+                b"\x01\x00\x024"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x01\xfd"
+                b"\x00\x00\x01\xf9"
+                b"\x01\xf7\x00\x01\xf4" + b"x" * 500
+            ],
+        )
 
 
 class TestSNILongName12(unittest.TestCase):
@@ -1593,18 +1584,18 @@ class TestSNILongName12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x02P'
-                          b'\x01\x00\x02L'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x01\xfd'
-                          b'\x00\x00\x01\xf9'
-                          b'\x01\xf7\x00\x01\xf4' + b'x'*500])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x02P"
+                b"\x01\x00\x02L"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x01\xfd"
+                b"\x00\x00\x01\xf9"
+                b"\x01\xf7\x00\x01\xf4" + b"x" * 500
+            ],
+        )
 
 
 class TestSNIWrongName12PFS(unittest.TestCase):
@@ -1615,18 +1606,18 @@ class TestSNIWrongName12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x02\x88'
-                          b'\x01\x00\x02\x84'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x01\xfd'
-                          b'\x00\x00\x01\xf9'
-                          b'\x01\xf7\x00\x01\xf4' + b'x'*500])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x02\x88"
+                b"\x01\x00\x02\x84"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x01\xfd"
+                b"\x00\x00\x01\xf9"
+                b"\x01\xf7\x00\x01\xf4" + b"x" * 500
+            ],
+        )
 
 
 class TestSNIEmptyName(unittest.TestCase):
@@ -1636,18 +1627,18 @@ class TestSNIEmptyName(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00D'
-                          b'\x01\x00\x00@'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\x00\x00\x00\x05'
-                          b'\x00\x03\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00D"
+                b"\x01\x00\x00@"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\x00\x00\x00\x05"
+                b"\x00\x03\x00\x00\x00"
+            ],
+        )
 
 
 class TestSNIEmptyName12(unittest.TestCase):
@@ -1658,18 +1649,18 @@ class TestSNIEmptyName12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\\'
-                          b'\x01\x00\x00X'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\x00\x00\x00\x05'
-                          b'\x00\x03\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\\"
+                b"\x01\x00\x00X"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\x00\x00\x00\x05"
+                b"\x00\x03\x00\x00\x00"
+            ],
+        )
 
 
 class TestSNIEmptyName12PFS(unittest.TestCase):
@@ -1680,390 +1671,390 @@ class TestSNIEmptyName12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x94'
-                          b'\x01\x00\x00\x90'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\x00\x00\x00\x05'
-                          b'\x00\x03\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x94"
+                b"\x01\x00\x00\x90"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\x00\x00\x00\x05"
+                b"\x00\x03\x00\x00\x00"
+            ],
+        )
 
 
 class TestSNIOneWrong(unittest.TestCase):
     def test_test(self):
         probe = SNIOneWrong()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00c'
-                          b'\x01\x00\x00_'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00('
-                          b'\x00\x00\x00$'
-                          b'\x00"'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00c"
+                b"\x01\x00\x00_"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00("
+                b"\x00\x00\x00$"
+                b'\x00"'
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNIOneWrong12(unittest.TestCase):
     def test_test(self):
         probe = SNIOneWrong12()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00{'
-                          b'\x01\x00\x00w'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00('
-                          b'\x00\x00\x00$'
-                          b'\x00"'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00{"
+                b"\x01\x00\x00w"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00("
+                b"\x00\x00\x00$"
+                b'\x00"'
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNIOneWrong12PFS(unittest.TestCase):
     def test_test(self):
         probe = SNIOneWrong12PFS()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\xb3"
-                          b"\x01\x00\x00\xaf"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00('
-                          b'\x00\x00\x00$'
-                          b'\x00"'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x11thisisnotyourname'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xb3"
+                b"\x01\x00\x00\xaf"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00("
+                b"\x00\x00\x00$"
+                b'\x00"'
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x11thisisnotyourname"
+            ],
+        )
 
 
 class TestSNIWithDifferentType(unittest.TestCase):
     def test_test(self):
         probe = SNIWithDifferentType()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00_'
-                          b'\x01\x00\x00['
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x04\x00\r<binary-data>'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00_"
+                b"\x01\x00\x00["
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x00\x00\x0bexample.com"
+                b"\x04\x00\r<binary-data>"
+            ],
+        )
 
 
 class TestSNIWithDifferentType12(unittest.TestCase):
     def test_test(self):
         probe = SNIWithDifferentType12()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00w'
-                          b'\x01\x00\x00s'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x04\x00\r<binary-data>'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00w"
+                b"\x01\x00\x00s"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x00\x00\x0bexample.com"
+                b"\x04\x00\r<binary-data>"
+            ],
+        )
 
 
 class TestSNIWithDifferentType12PFS(unittest.TestCase):
     def test_test(self):
         probe = SNIWithDifferentType12PFS()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\xaf"
-                          b"\x01\x00\x00\xab"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x04\x00\r<binary-data>'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xaf"
+                b"\x01\x00\x00\xab"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x00\x00\x0bexample.com"
+                b"\x04\x00\r<binary-data>"
+            ],
+        )
 
 
 class TestSNIDifferentTypeRev(unittest.TestCase):
     def test_test(self):
         probe = SNIDifferentTypeRev()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00_'
-                          b'\x01\x00\x00['
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x04\x00\r<binary-data>'
-                          b'\x00\x00\x0bexample.com'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00_"
+                b"\x01\x00\x00["
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x04\x00\r<binary-data>"
+                b"\x00\x00\x0bexample.com"
+            ],
+        )
 
 
 class TestSNIDifferentTypeRev12(unittest.TestCase):
     def test_test(self):
         probe = SNIDifferentTypeRev12()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00w'
-                          b'\x01\x00\x00s'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x04\x00\r<binary-data>'
-                          b'\x00\x00\x0bexample.com'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00w"
+                b"\x01\x00\x00s"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x04\x00\r<binary-data>"
+                b"\x00\x00\x0bexample.com"
+            ],
+        )
 
 
 class TestSNIDifferentTypeRev12PFS(unittest.TestCase):
     def test_test(self):
         probe = SNIDifferentTypeRev12PFS()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\xaf"
-                          b"\x01\x00\x00\xab"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00$'
-                          b'\x00\x00\x00 '
-                          b'\x00\x1e'
-                          b'\x04\x00\r<binary-data>'
-                          b'\x00\x00\x0bexample.com'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xaf"
+                b"\x01\x00\x00\xab"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00$"
+                b"\x00\x00\x00 "
+                b"\x00\x1e"
+                b"\x04\x00\r<binary-data>"
+                b"\x00\x00\x0bexample.com"
+            ],
+        )
 
 
 class TestSNIOverflow(unittest.TestCase):
     def test_test(self):
         probe = SNIOverflow()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00N'
-                          b'\x01\x00\x00J'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x13'
-                          b'\x00\x00\x00\x0f'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.co'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00N"
+                b"\x01\x00\x00J"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x13"
+                b"\x00\x00\x00\x0f"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.co"
+            ],
+        )
 
 
 class TestSNIOverflow12(unittest.TestCase):
     def test_test(self):
         probe = SNIOverflow12()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00f'
-                          b'\x01\x00\x00b'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x13'
-                          b'\x00\x00\x00\x0f'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.co'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00f"
+                b"\x01\x00\x00b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x13"
+                b"\x00\x00\x00\x0f"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.co"
+            ],
+        )
 
 
 class TestSNIOverflow12PFS(unittest.TestCase):
     def test_test(self):
         probe = SNIOverflow12PFS()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x9e"
-                          b"\x01\x00\x00\x9a"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x13'
-                          b'\x00\x00\x00\x0f'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.co'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x9e"
+                b"\x01\x00\x00\x9a"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x13"
+                b"\x00\x00\x00\x0f"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.co"
+            ],
+        )
 
 
 class TestSNIUnderflow(unittest.TestCase):
     def test_test(self):
         probe = SNIUnderflow()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00R'
-                          b'\x01\x00\x00N'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x17'
-                          b'\x00\x00\x00\x13'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00R"
+                b"\x01\x00\x00N"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x17"
+                b"\x00\x00\x00\x13"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x00"
+            ],
+        )
 
 
 class TestSNIUnderflow12(unittest.TestCase):
     def test_test(self):
         probe = SNIUnderflow12()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00j'
-                          b'\x01\x00\x00f'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x17'
-                          b'\x00\x00\x00\x13'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00j"
+                b"\x01\x00\x00f"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x17"
+                b"\x00\x00\x00\x13"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x00"
+            ],
+        )
 
 
 class TestSNIUnderflow12PFS(unittest.TestCase):
     def test_test(self):
         probe = SNIUnderflow12PFS()
-        probe.ipaddress = b'example.com'
+        probe.ipaddress = b"example.com"
         sock = MockSock()
 
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\xa2"
-                          b"\x01\x00\x00\x9e"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x17'
-                          b'\x00\x00\x00\x13'
-                          b'\x00\x0e'
-                          b'\x00\x00\x0bexample.com'
-                          b'\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xa2"
+                b"\x01\x00\x00\x9e"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x17"
+                b"\x00\x00\x00\x13"
+                b"\x00\x0e"
+                b"\x00\x00\x0bexample.com"
+                b"\x00\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoOverflow(unittest.TestCase):
@@ -2073,18 +2064,18 @@ class TestSecureRenegoOverflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00J'
-                          b'\x01\x00\x00F'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0f'
-                          b'\xff\x01\x00\x0b'
-                          b'\x0c0123456789'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00J"
+                b"\x01\x00\x00F"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0f"
+                b"\xff\x01\x00\x0b"
+                b"\x0c0123456789"
+            ],
+        )
 
 
 class TestSecureRenegoOverflow12(unittest.TestCase):
@@ -2094,18 +2085,18 @@ class TestSecureRenegoOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00b'
-                          b'\x01\x00\x00^'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0f'
-                          b'\xff\x01\x00\x0b'
-                          b'\x0c0123456789'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00b"
+                b"\x01\x00\x00^"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0f"
+                b"\xff\x01\x00\x0b"
+                b"\x0c0123456789"
+            ],
+        )
 
 
 class TestSecureRenegoOverflow12PFS(unittest.TestCase):
@@ -2116,18 +2107,18 @@ class TestSecureRenegoOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x9a'
-                          b'\x01\x00\x00\x96'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0f'
-                          b'\xff\x01\x00\x0b'
-                          b'\x0c0123456789'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x9a"
+                b"\x01\x00\x00\x96"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0f"
+                b"\xff\x01\x00\x0b"
+                b"\x0c0123456789"
+            ],
+        )
 
 
 class TestSecureRenegoUnderflow(unittest.TestCase):
@@ -2137,18 +2128,18 @@ class TestSecureRenegoUnderflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00D'
-                          b'\x01\x00\x00@'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\xff\x01\x00\x05'
-                          b'\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00D"
+                b"\x01\x00\x00@"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\xff\x01\x00\x05"
+                b"\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoUnderflow12(unittest.TestCase):
@@ -2158,18 +2149,18 @@ class TestSecureRenegoUnderflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\\'
-                          b'\x01\x00\x00X'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\xff\x01\x00\x05'
-                          b'\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\\"
+                b"\x01\x00\x00X"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\xff\x01\x00\x05"
+                b"\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoUnderflow12PFS(unittest.TestCase):
@@ -2180,18 +2171,18 @@ class TestSecureRenegoUnderflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x94'
-                          b'\x01\x00\x00\x90'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\t'
-                          b'\xff\x01\x00\x05'
-                          b'\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x94"
+                b"\x01\x00\x00\x90"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\t"
+                b"\xff\x01\x00\x05"
+                b"\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoNonEmpty(unittest.TestCase):
@@ -2201,17 +2192,17 @@ class TestSecureRenegoNonEmpty(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00L'
-                          b'\x01\x00\x00H'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x11\xff\x01'
-                          b'\x00\r\x0c012345678901'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00L"
+                b"\x01\x00\x00H"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x11\xff\x01"
+                b"\x00\r\x0c012345678901"
+            ],
+        )
 
 
 class TestSecureRenegoNonEmpty12(unittest.TestCase):
@@ -2221,17 +2212,17 @@ class TestSecureRenegoNonEmpty12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00d'
-                          b'\x01\x00\x00`'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x11\xff\x01'
-                          b'\x00\r\x0c012345678901'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00d"
+                b"\x01\x00\x00`"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x11\xff\x01"
+                b"\x00\r\x0c012345678901"
+            ],
+        )
 
 
 class TestSecureRenegoNonEmpty12PFS(unittest.TestCase):
@@ -2242,17 +2233,17 @@ class TestSecureRenegoNonEmpty12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x9c'
-                          b'\x01\x00\x00\x98'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x11\xff\x01'
-                          b'\x00\r\x0c012345678901'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x9c"
+                b"\x01\x00\x00\x98"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x11\xff\x01"
+                b"\x00\r\x0c012345678901"
+            ],
+        )
 
 
 class TestSecureRenegoNull(unittest.TestCase):
@@ -2262,17 +2253,17 @@ class TestSecureRenegoNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\xff\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\xff\x01\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoNull12(unittest.TestCase):
@@ -2282,17 +2273,17 @@ class TestSecureRenegoNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\xff\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\xff\x01\x00\x00"
+            ],
+        )
 
 
 class TestSecureRenegoNonEmpty12PFS(unittest.TestCase):
@@ -2303,17 +2294,17 @@ class TestSecureRenegoNonEmpty12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x8f'
-                          b'\x01\x00\x00\x8b'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\xff\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\xff\x01\x00\x00"
+            ],
+        )
 
 
 class TestMaxFragmentNull(unittest.TestCase):
@@ -2323,17 +2314,17 @@ class TestMaxFragmentNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x01\x00\x00"
+            ],
+        )
 
 
 class TestMaxFragmentNull12(unittest.TestCase):
@@ -2343,17 +2334,17 @@ class TestMaxFragmentNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x01\x00\x00"
+            ],
+        )
 
 
 class TestMaxFragmentNull12PFS(unittest.TestCase):
@@ -2364,17 +2355,17 @@ class TestMaxFragmentNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x01\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x01\x00\x00"
+            ],
+        )
 
 
 class TestMaxFragmentInvalid(unittest.TestCase):
@@ -2384,18 +2375,18 @@ class TestMaxFragmentInvalid(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00@'
-                          b'\x01\x00\x00<'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x01\x00\x01'
-                          b'\x08'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00@"
+                b"\x01\x00\x00<"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x01\x00\x01"
+                b"\x08"
+            ],
+        )
 
 
 class TestMaxFragmentInvalid12(unittest.TestCase):
@@ -2405,18 +2396,18 @@ class TestMaxFragmentInvalid12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00X'
-                          b'\x01\x00\x00T'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x01\x00\x01'
-                          b'\x08'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00X"
+                b"\x01\x00\x00T"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x01\x00\x01"
+                b"\x08"
+            ],
+        )
 
 
 class TestMaxFragmentInvalid12PFS(unittest.TestCase):
@@ -2427,18 +2418,18 @@ class TestMaxFragmentInvalid12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x90"
-                          b"\x01\x00\x00\x8c"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x05'
-                          b'\x00\x01\x00\x01'
-                          b'\x08'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x90"
+                b"\x01\x00\x00\x8c"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x01\x00\x01"
+                b"\x08"
+            ],
+        )
 
 
 class TestClientCertURLsNotNull(unittest.TestCase):
@@ -2448,18 +2439,18 @@ class TestClientCertURLsNotNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00A'
-                          b'\x01\x00\x00='
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x02\x00\x02'
-                          b'\x08\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00A"
+                b"\x01\x00\x00="
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x02\x00\x02"
+                b"\x08\x00"
+            ],
+        )
 
 
 class TestClientCertURLsNotNull12(unittest.TestCase):
@@ -2469,18 +2460,18 @@ class TestClientCertURLsNotNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Y'
-                          b'\x01\x00\x00U'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x02\x00\x02'
-                          b'\x08\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Y"
+                b"\x01\x00\x00U"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x02\x00\x02"
+                b"\x08\x00"
+            ],
+        )
 
 
 class TestClientCertURLsNotNull12PFS(unittest.TestCase):
@@ -2491,18 +2482,18 @@ class TestClientCertURLsNotNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x91"
-                          b"\x01\x00\x00\x8d"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x06'
-                          b'\x00\x02\x00\x02'
-                          b'\x08\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x91"
+                b"\x01\x00\x00\x8d"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x02\x00\x02"
+                b"\x08\x00"
+            ],
+        )
 
 
 class TestTrustedCANull(unittest.TestCase):
@@ -2512,17 +2503,17 @@ class TestTrustedCANull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x03\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x03\x00\x00"
+            ],
+        )
 
 
 class TestTrustedCANull12(unittest.TestCase):
@@ -2532,17 +2523,17 @@ class TestTrustedCANull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x03\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x03\x00\x00"
+            ],
+        )
 
 
 class TestTrustedCANull12PFS(unittest.TestCase):
@@ -2553,17 +2544,17 @@ class TestTrustedCANull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x03\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x03\x00\x00"
+            ],
+        )
 
 
 class TestTrustedCAOverflow(unittest.TestCase):
@@ -2573,18 +2564,18 @@ class TestTrustedCAOverflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00A'
-                          b'\x01\x00\x00='
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x03\x00\x02'
-                          b'\x00\x15'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00A"
+                b"\x01\x00\x00="
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x03\x00\x02"
+                b"\x00\x15"
+            ],
+        )
 
 
 class TestTrustedCAOverflow12(unittest.TestCase):
@@ -2594,18 +2585,18 @@ class TestTrustedCAOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Y'
-                          b'\x01\x00\x00U'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x03\x00\x02'
-                          b'\x00\x15'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Y"
+                b"\x01\x00\x00U"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x03\x00\x02"
+                b"\x00\x15"
+            ],
+        )
 
 
 class TestTrustedCAOverflow12PFS(unittest.TestCase):
@@ -2616,18 +2607,18 @@ class TestTrustedCAOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x91"
-                          b"\x01\x00\x00\x8d"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x06'
-                          b'\x00\x03\x00\x02'
-                          b'\x00\x15'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x91"
+                b"\x01\x00\x00\x8d"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x03\x00\x02"
+                b"\x00\x15"
+            ],
+        )
 
 
 class TestTrustedCAUnderflow(unittest.TestCase):
@@ -2638,18 +2629,18 @@ class TestTrustedCAUnderflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x1c'
-                          b'\x00\x03\x00\x18'
-                          b'\x00\x15\x01' + 'a'*20 + b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1c"
+                b"\x00\x03\x00\x18"
+                b"\x00\x15\x01" + "a" * 20 + b"\x00"
+            ],
+        )
 
 
 class TestTrustedCAUnderflow12(unittest.TestCase):
@@ -2660,18 +2651,18 @@ class TestTrustedCAUnderflow12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00o'
-                          b'\x01\x00\x00k'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x1c'
-                          b'\x00\x03\x00\x18'
-                          b'\x00\x15\x01' + 'a'*20 + b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00o"
+                b"\x01\x00\x00k"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1c"
+                b"\x00\x03\x00\x18"
+                b"\x00\x15\x01" + "a" * 20 + b"\x00"
+            ],
+        )
 
 
 class TestTrustedCAUnderflow12PFS(unittest.TestCase):
@@ -2682,18 +2673,18 @@ class TestTrustedCAUnderflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\xa7"
-                          b"\x01\x00\x00\xa3"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x1c'
-                          b'\x00\x03\x00\x18'
-                          b'\x00\x15\x01' + 'a'*20 + b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\xa7"
+                b"\x01\x00\x00\xa3"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x1c"
+                b"\x00\x03\x00\x18"
+                b"\x00\x15\x01" + "a" * 20 + b"\x00"
+            ],
+        )
 
 
 class TestTruncatedHMACNotNull(unittest.TestCase):
@@ -2703,18 +2694,18 @@ class TestTruncatedHMACNotNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00@'
-                          b'\x01\x00\x00<'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x04\x00\x01'
-                          b'\x0c'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00@"
+                b"\x01\x00\x00<"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x04\x00\x01"
+                b"\x0c"
+            ],
+        )
 
 
 class TestTruncatedHMACNotNull12(unittest.TestCase):
@@ -2724,18 +2715,18 @@ class TestTruncatedHMACNotNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00X'
-                          b'\x01\x00\x00T'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x05'
-                          b'\x00\x04\x00\x01'
-                          b'\x0c'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00X"
+                b"\x01\x00\x00T"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x04\x00\x01"
+                b"\x0c"
+            ],
+        )
 
 
 class TestTruncatedHMACNotNull12PFS(unittest.TestCase):
@@ -2746,18 +2737,18 @@ class TestTruncatedHMACNotNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x90"
-                          b"\x01\x00\x00\x8c"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x05'
-                          b'\x00\x04\x00\x01'
-                          b'\x0c'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x90"
+                b"\x01\x00\x00\x8c"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x05"
+                b"\x00\x04\x00\x01"
+                b"\x0c"
+            ],
+        )
 
 
 class TestOCSPNull(unittest.TestCase):
@@ -2767,17 +2758,17 @@ class TestOCSPNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x05\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x05\x00\x00"
+            ],
+        )
 
 
 class TestOCSPNull12(unittest.TestCase):
@@ -2787,17 +2778,17 @@ class TestOCSPNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x05\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x05\x00\x00"
+            ],
+        )
 
 
 class TestOCSPNull12PFS(unittest.TestCase):
@@ -2808,17 +2799,17 @@ class TestOCSPNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x05\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x05\x00\x00"
+            ],
+        )
 
 
 class TestOCSPOverflow(unittest.TestCase):
@@ -2828,18 +2819,18 @@ class TestOCSPOverflow(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00C'
-                          b'\x01\x00\x00?'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x08'
-                          b'\x00\x05\x00\x04'
-                          b'\x01\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00C"
+                b"\x01\x00\x00?"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x05\x00\x04"
+                b"\x01\x00\x00\x00"
+            ],
+        )
 
 
 class TestOCSPOverflow12(unittest.TestCase):
@@ -2849,18 +2840,18 @@ class TestOCSPOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00['
-                          b'\x01\x00\x00W'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x08'
-                          b'\x00\x05\x00\x04'
-                          b'\x01\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00["
+                b"\x01\x00\x00W"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x05\x00\x04"
+                b"\x01\x00\x00\x00"
+            ],
+        )
 
 
 class TestOCSPOverflow12PFS(unittest.TestCase):
@@ -2871,18 +2862,18 @@ class TestOCSPOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x93"
-                          b"\x01\x00\x00\x8f"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x08'
-                          b'\x00\x05\x00\x04'
-                          b'\x01\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x93"
+                b"\x01\x00\x00\x8f"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x05\x00\x04"
+                b"\x01\x00\x00\x00"
+            ],
+        )
 
 
 class TestOCSPUnderflow(unittest.TestCase):
@@ -2893,18 +2884,18 @@ class TestOCSPUnderflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00F'
-                          b'\x01\x00\x00B'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0b'
-                          b'\x00\x05\x00\x07'
-                          b'\x01\x00\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00F"
+                b"\x01\x00\x00B"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0b"
+                b"\x00\x05\x00\x07"
+                b"\x01\x00\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestOCSPUnderflow12(unittest.TestCase):
@@ -2915,18 +2906,18 @@ class TestOCSPUnderflow12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00^'
-                          b'\x01\x00\x00Z'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0b'
-                          b'\x00\x05\x00\x07'
-                          b'\x01\x00\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00^"
+                b"\x01\x00\x00Z"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0b"
+                b"\x00\x05\x00\x07"
+                b"\x01\x00\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestOCSPUnderflow12PFS(unittest.TestCase):
@@ -2937,18 +2928,18 @@ class TestOCSPUnderflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x96"
-                          b"\x01\x00\x00\x92"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x0b'
-                          b'\x00\x05\x00\x07'
-                          b'\x01\x00\x00\x00\x00\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x96"
+                b"\x01\x00\x00\x92"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0b"
+                b"\x00\x05\x00\x07"
+                b"\x01\x00\x00\x00\x00\x00\x00"
+            ],
+        )
 
 
 class TestDoubleExtension(unittest.TestCase):
@@ -2958,20 +2949,20 @@ class TestDoubleExtension(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00E'
-                          b'\x01\x00\x00A'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0a'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00E"
+                b"\x01\x00\x00A"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0a"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestDoubleExtension12(unittest.TestCase):
@@ -2981,20 +2972,20 @@ class TestDoubleExtension12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00]'
-                          b'\x01\x00\x00Y'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x0a'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00]"
+                b"\x01\x00\x00Y"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0a"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestDoubleExtension12PFS(unittest.TestCase):
@@ -3005,20 +2996,20 @@ class TestDoubleExtension12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x95"
-                          b"\x01\x00\x00\x91"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x0a'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'
-                          b'\xff\x01\x00\x01'
-                          b'\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x95"
+                b"\x01\x00\x00\x91"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x0a"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+                b"\xff\x01\x00\x01"
+                b"\x00"
+            ],
+        )
 
 
 class TestUserMappingNull(unittest.TestCase):
@@ -3028,17 +3019,17 @@ class TestUserMappingNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x06\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x06\x00\x00"
+            ],
+        )
 
 
 class TestUserMappingNull12(unittest.TestCase):
@@ -3048,17 +3039,17 @@ class TestUserMappingNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x06\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x06\x00\x00"
+            ],
+        )
 
 
 class TestUserMappingNull12PFS(unittest.TestCase):
@@ -3069,17 +3060,17 @@ class TestUserMappingNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x06\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x06\x00\x00"
+            ],
+        )
 
 
 class TestUserMappingOverflow(unittest.TestCase):
@@ -3090,18 +3081,18 @@ class TestUserMappingOverflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00A'
-                          b'\x01\x00\x00='
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x06\x00\x02'
-                          b'\x02\x40'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00A"
+                b"\x01\x00\x00="
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x06\x00\x02"
+                b"\x02\x40"
+            ],
+        )
 
 
 class TestUserMappingOverflow12(unittest.TestCase):
@@ -3111,18 +3102,18 @@ class TestUserMappingOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Y'
-                          b'\x01\x00\x00U'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x06\x00\x02'
-                          b'\x02\x40'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Y"
+                b"\x01\x00\x00U"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x06\x00\x02"
+                b"\x02\x40"
+            ],
+        )
 
 
 class TestUserMappingOverflow12PFS(unittest.TestCase):
@@ -3133,18 +3124,18 @@ class TestUserMappingOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x91"
-                          b"\x01\x00\x00\x8d"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x06'
-                          b'\x00\x06\x00\x02'
-                          b'\x02\x40'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x91"
+                b"\x01\x00\x00\x8d"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x06\x00\x02"
+                b"\x02\x40"
+            ],
+        )
 
 
 class TestClientAuthzNull(unittest.TestCase):
@@ -3154,17 +3145,17 @@ class TestClientAuthzNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x07\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x07\x00\x00"
+            ],
+        )
 
 
 class TestClientAuthzNull12(unittest.TestCase):
@@ -3174,17 +3165,17 @@ class TestClientAuthzNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x07\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x07\x00\x00"
+            ],
+        )
 
 
 class TestClientAuthzNull12PFS(unittest.TestCase):
@@ -3195,17 +3186,17 @@ class TestClientAuthzNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x07\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x07\x00\x00"
+            ],
+        )
 
 
 class TestClientAuthzOverflow(unittest.TestCase):
@@ -3216,18 +3207,18 @@ class TestClientAuthzOverflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00B'
-                          b'\x01\x00\x00>'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x07'
-                          b'\x00\x07\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00B"
+                b"\x01\x00\x00>"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x07\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestClientAuthzOverflow12(unittest.TestCase):
@@ -3237,18 +3228,18 @@ class TestClientAuthzOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Z'
-                          b'\x01\x00\x00V'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x07'
-                          b'\x00\x07\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Z"
+                b"\x01\x00\x00V"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x07\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestClientAuthzOverflow12FS(unittest.TestCase):
@@ -3259,18 +3250,18 @@ class TestClientAuthzOverflow12FS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x92"
-                          b"\x01\x00\x00\x8e"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x07'
-                          b'\x00\x07\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x92"
+                b"\x01\x00\x00\x8e"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x07\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestServerAuthzNull(unittest.TestCase):
@@ -3280,17 +3271,17 @@ class TestServerAuthzNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x08\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x08\x00\x00"
+            ],
+        )
 
 
 class TestServerAuthzNull12(unittest.TestCase):
@@ -3300,17 +3291,17 @@ class TestServerAuthzNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x08\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x08\x00\x00"
+            ],
+        )
 
 
 class TestServerAuthzNull12PFS(unittest.TestCase):
@@ -3321,17 +3312,17 @@ class TestServerAuthzNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x08\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x08\x00\x00"
+            ],
+        )
 
 
 class TestServerAuthzOverflow(unittest.TestCase):
@@ -3342,18 +3333,18 @@ class TestServerAuthzOverflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00B'
-                          b'\x01\x00\x00>'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x07'
-                          b'\x00\x08\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00B"
+                b"\x01\x00\x00>"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x08\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestServerAuthzOverflow12(unittest.TestCase):
@@ -3363,18 +3354,18 @@ class TestServerAuthzOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Z'
-                          b'\x01\x00\x00V'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x07'
-                          b'\x00\x08\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Z"
+                b"\x01\x00\x00V"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x08\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestServerAuthzOverflow12FS(unittest.TestCase):
@@ -3385,18 +3376,18 @@ class TestServerAuthzOverflow12FS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x92"
-                          b"\x01\x00\x00\x8e"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x07'
-                          b'\x00\x08\x00\x03'
-                          b'\x04\x00\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x92"
+                b"\x01\x00\x00\x8e"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x07"
+                b"\x00\x08\x00\x03"
+                b"\x04\x00\x01"
+            ],
+        )
 
 
 class TestCertTypeNull(unittest.TestCase):
@@ -3406,17 +3397,17 @@ class TestCertTypeNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x09\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x09\x00\x00"
+            ],
+        )
 
 
 class TestCertTypeNull12(unittest.TestCase):
@@ -3426,17 +3417,17 @@ class TestCertTypeNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x09\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x09\x00\x00"
+            ],
+        )
 
 
 class TestCertTypeNull12PFS(unittest.TestCase):
@@ -3447,17 +3438,17 @@ class TestCertTypeNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x8f"
-                          b"\x01\x00\x00\x8b"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x04'
-                          b'\x00\x09\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x09\x00\x00"
+            ],
+        )
 
 
 class TestCertTypeOverflow(unittest.TestCase):
@@ -3468,18 +3459,18 @@ class TestCertTypeOverflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00A'
-                          b'\x01\x00\x00='
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x09\x00\x02'
-                          b'\x04\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00A"
+                b"\x01\x00\x00="
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x09\x00\x02"
+                b"\x04\x01"
+            ],
+        )
 
 
 class TestCertTypeOverflow12(unittest.TestCase):
@@ -3489,18 +3480,18 @@ class TestCertTypeOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00Y'
-                          b'\x01\x00\x00U'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x06'
-                          b'\x00\x09\x00\x02'
-                          b'\x04\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00Y"
+                b"\x01\x00\x00U"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x09\x00\x02"
+                b"\x04\x01"
+            ],
+        )
 
 
 class TestCertTypeOverflow12PFS(unittest.TestCase):
@@ -3511,18 +3502,18 @@ class TestCertTypeOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x91"
-                          b"\x01\x00\x00\x8d"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x06'
-                          b'\x00\x09\x00\x02'
-                          b'\x04\x01'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x91"
+                b"\x01\x00\x00\x8d"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x06"
+                b"\x00\x09\x00\x02"
+                b"\x04\x01"
+            ],
+        )
 
 
 class TestSupportedGroupsNull(unittest.TestCase):
@@ -3532,17 +3523,17 @@ class TestSupportedGroupsNull(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00?'
-                          b'\x01\x00\x00;'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x0a\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00?"
+                b"\x01\x00\x00;"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x0a\x00\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsNull12(unittest.TestCase):
@@ -3552,17 +3543,17 @@ class TestSupportedGroupsNull12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00W'
-                          b'\x01\x00\x00S'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x0a\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00W"
+                b"\x01\x00\x00S"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x0a\x00\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsNull12PFS(unittest.TestCase):
@@ -3573,17 +3564,17 @@ class TestSupportedGroupsNull12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\x8f'
-                          b'\x01\x00\x00\x8b'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00^' +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x04'
-                          b'\x00\x0a\x00\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x8f"
+                b"\x01\x00\x00\x8b"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x04"
+                b"\x00\x0a\x00\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsOddLen(unittest.TestCase):
@@ -3594,18 +3585,18 @@ class TestSupportedGroupsOddLen(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00D'
-                          b'\x01\x00\x00@'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x09'
-                          b'\x00\x0a\x00\x05'
-                          b'\x00\x03\x00\x17\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00D"
+                b"\x01\x00\x00@"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x09"
+                b"\x00\x0a\x00\x05"
+                b"\x00\x03\x00\x17\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsOddLen12(unittest.TestCase):
@@ -3615,18 +3606,18 @@ class TestSupportedGroupsOddLen12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00\\'
-                          b'\x01\x00\x00X'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x09'
-                          b'\x00\x0a\x00\x05'
-                          b'\x00\x03\x00\x17\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\\"
+                b"\x01\x00\x00X"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x09"
+                b"\x00\x0a\x00\x05"
+                b"\x00\x03\x00\x17\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsOddLen12PFS(unittest.TestCase):
@@ -3637,18 +3628,18 @@ class TestSupportedGroupsOddLen12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x94"
-                          b"\x01\x00\x00\x90"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x09'
-                          b'\x00\x0a\x00\x05'
-                          b'\x00\x03\x00\x17\x00'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x94"
+                b"\x01\x00\x00\x90"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x09"
+                b"\x00\x0a\x00\x05"
+                b"\x00\x03\x00\x17\x00"
+            ],
+        )
 
 
 class TestSupportedGroupsOverflow(unittest.TestCase):
@@ -3659,18 +3650,18 @@ class TestSupportedGroupsOverflow(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00C'
-                          b'\x01\x00\x00?'
-                          b'\x03\x01' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00\x0e' +
-                          DEFAULT_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x08'
-                          b'\x00\x0a\x00\x04'
-                          b'\x00\x04\x00\x17'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00C"
+                b"\x01\x00\x00?"
+                b"\x03\x01" + RANDOM_STR + b"\x00"
+                b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x0a\x00\x04"
+                b"\x00\x04\x00\x17"
+            ],
+        )
 
 
 class TestSupportedGroupsOverflow12(unittest.TestCase):
@@ -3680,18 +3671,18 @@ class TestSupportedGroupsOverflow12(unittest.TestCase):
 
         probe.test(sock)
 
-        self.assertEqual(sock.sent_data,
-                         [b'\x16\x03\x01\x00['
-                          b'\x01\x00\x00W'
-                          b'\x03\x03' +
-                          RANDOM_STR +
-                          b'\x00'
-                          b'\x00&' +
-                          DEFAULT_12_CIPHERS_STR +
-                          b'\x01\x00'
-                          b'\x00\x08'
-                          b'\x00\x0a\x00\x04'
-                          b'\x00\x04\x00\x17'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00["
+                b"\x01\x00\x00W"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x0a\x00\x04"
+                b"\x00\x04\x00\x17"
+            ],
+        )
 
 
 class TestSupportedGroupsOverflow12PFS(unittest.TestCase):
@@ -3702,18 +3693,18 @@ class TestSupportedGroupsOverflow12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        self.assertEqual(sock.sent_data,
-                         [b"\x16\x03\x01\x00\x93"
-                          b"\x01\x00\x00\x8f"
-                          b"\x03\x03" +
-                          RANDOM_STR +
-                          b"\x00"
-                          b"\x00^" +
-                          DEFAULT_PFS_CIPHERS_STR +
-                          b"\x01\x00"
-                          b'\x00\x08'
-                          b'\x00\x0a\x00\x04'
-                          b'\x00\x04\x00\x17'])
+        self.assertEqual(
+            sock.sent_data,
+            [
+                b"\x16\x03\x01\x00\x93"
+                b"\x01\x00\x00\x8f"
+                b"\x03\x03" + RANDOM_STR + b"\x00"
+                b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+                b"\x00\x08"
+                b"\x00\x0a\x00\x04"
+                b"\x00\x04\x00\x17"
+            ],
+        )
 
 
 class TestPadding16384Byte(unittest.TestCase):
@@ -3724,21 +3715,16 @@ class TestPadding16384Byte(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfc'
-                    b'\x03\x01' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00\x0e' +
-                    DEFAULT_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3f\xc5'
-                    b'\x00\x15\x3f\xc1' +
-                    b'\x00' * (16384 - (64-5) - 4))
-        self.assertEqual(repr(sock.sent_data[0][:70]),
-                         repr(expected[:70]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfc"
+            b"\x03\x01" + RANDOM_STR + b"\x00"
+            b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+            b"\x3f\xc5"
+            b"\x00\x15\x3f\xc1" + b"\x00" * (16384 - (64 - 5) - 4)
+        )
+        self.assertEqual(repr(sock.sent_data[0][:70]), repr(expected[:70]))
+        self.assertEqual(sock.sent_data, [expected])
 
 
 class TestPadding16384Byte12(unittest.TestCase):
@@ -3749,21 +3735,16 @@ class TestPadding16384Byte12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfc'
-                    b'\x03\x03' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00&' +
-                    DEFAULT_12_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3f\xad'
-                    b'\x00\x15\x3f\xa9' +
-                    b'\x00' * (16384 - (88-5) - 4))
-        self.assertEqual(repr(sock.sent_data[0][:100]),
-                         repr(expected[:100]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfc"
+            b"\x03\x03" + RANDOM_STR + b"\x00"
+            b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+            b"\x3f\xad"
+            b"\x00\x15\x3f\xa9" + b"\x00" * (16384 - (88 - 5) - 4)
+        )
+        self.assertEqual(repr(sock.sent_data[0][:100]), repr(expected[:100]))
+        self.assertEqual(sock.sent_data, [expected])
 
 
 class TestPadding16384Byte12PFS(unittest.TestCase):
@@ -3774,21 +3755,16 @@ class TestPadding16384Byte12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfc'
-                    b'\x03\x03' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00^' +
-                    DEFAULT_PFS_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3fu'
-                    b'\x00\x15\x3fq' +
-                    b'\x00' * (16384 - (144-5) - 4))
-        self.assertEqual(repr(sock.sent_data[0][:160]),
-                         repr(expected[:160]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfc"
+            b"\x03\x03" + RANDOM_STR + b"\x00"
+            b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+            b"\x3fu"
+            b"\x00\x15\x3fq" + b"\x00" * (16384 - (144 - 5) - 4)
+        )
+        self.assertEqual(repr(sock.sent_data[0][:160]), repr(expected[:160]))
+        self.assertEqual(sock.sent_data, [expected])
 
 
 class TestPadding16385Byte(unittest.TestCase):
@@ -3799,23 +3775,19 @@ class TestPadding16385Byte(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfd'
-                    b'\x03\x01' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00\x0e' +
-                    DEFAULT_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3f\xc6'
-                    b'\x00\x15\x3f\xc2' +
-                    b'\x00' * (16385 - (64-5) - 4 - 1) +
-                    b'\x16\x03\x01\x00\x01'  # second record
-                    b'\x00')
-        self.assertEqual(repr(sock.sent_data[0][:70]),
-                         repr(expected[:70]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfd"
+            b"\x03\x01" + RANDOM_STR + b"\x00"
+            b"\x00\x0e" + DEFAULT_CIPHERS_STR + b"\x01\x00"
+            b"\x3f\xc6"
+            b"\x00\x15\x3f\xc2"
+            + b"\x00" * (16385 - (64 - 5) - 4 - 1)
+            + b"\x16\x03\x01\x00\x01"  # second record
+            b"\x00"
+        )
+        self.assertEqual(repr(sock.sent_data[0][:70]), repr(expected[:70]))
+        self.assertEqual(sock.sent_data, [expected])
 
 
 class TestPadding16385Byte12(unittest.TestCase):
@@ -3826,23 +3798,19 @@ class TestPadding16385Byte12(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfd'
-                    b'\x03\x03' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00&' +
-                    DEFAULT_12_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3f\xae'
-                    b'\x00\x15\x3f\xaa' +
-                    b'\x00' * (16385 - (88-5) - 4 -1 ) +
-                    b'\x16\x03\x01\x00\x01'  # second record
-                    b'\x00')
-        self.assertEqual(repr(sock.sent_data[0][:100]),
-                         repr(expected[:100]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfd"
+            b"\x03\x03" + RANDOM_STR + b"\x00"
+            b"\x00&" + DEFAULT_12_CIPHERS_STR + b"\x01\x00"
+            b"\x3f\xae"
+            b"\x00\x15\x3f\xaa"
+            + b"\x00" * (16385 - (88 - 5) - 4 - 1)
+            + b"\x16\x03\x01\x00\x01"  # second record
+            b"\x00"
+        )
+        self.assertEqual(repr(sock.sent_data[0][:100]), repr(expected[:100]))
+        self.assertEqual(sock.sent_data, [expected])
 
 
 class TestPadding16385Byte12PFS(unittest.TestCase):
@@ -3853,20 +3821,16 @@ class TestPadding16385Byte12PFS(unittest.TestCase):
         probe.test(sock)
 
         self.maxDiff = None
-        expected = (b'\x16\x03\x01\x40\x00'
-                    b'\x01\x00\x3f\xfd'
-                    b'\x03\x03' +
-                    RANDOM_STR +
-                    b'\x00'
-                    b'\x00^' +
-                    DEFAULT_PFS_CIPHERS_STR +
-                    b'\x01\x00'
-                    b'\x3fv'
-                    b'\x00\x15\x3fr' +
-                    b'\x00' * (16385 - (144-5) - 4 - 1 ) +
-                    b'\x16\x03\x01\x00\x01'  # second record
-                    b'\x00')
-        self.assertEqual(repr(sock.sent_data[0][:160]),
-                         repr(expected[:160]))
-        self.assertEqual(sock.sent_data,
-                         [expected])
+        expected = (
+            b"\x16\x03\x01\x40\x00"
+            b"\x01\x00\x3f\xfd"
+            b"\x03\x03" + RANDOM_STR + b"\x00"
+            b"\x00^" + DEFAULT_PFS_CIPHERS_STR + b"\x01\x00"
+            b"\x3fv"
+            b"\x00\x15\x3fr"
+            + b"\x00" * (16385 - (144 - 5) - 4 - 1)
+            + b"\x16\x03\x01\x00\x01"  # second record
+            b"\x00"
+        )
+        self.assertEqual(repr(sock.sent_data[0][:160]), repr(expected[:160]))
+        self.assertEqual(sock.sent_data, [expected])

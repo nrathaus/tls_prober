@@ -10,15 +10,15 @@ from optparse import OptionParser
 from operator import itemgetter
 
 # Ensure we can see the pytls/tls subdir for the pytls submodule
-sys.path.insert(1, os.path.join(os.path.dirname(__file__), 'pytls'))
+sys.path.insert(1, os.path.join(os.path.dirname(__file__), "pytls"))
 from tls import *
 
 from probes import *
 import probe_db
 
-__version__ = '0.0.4'
-__author__ = 'Richard J. Moore'
-__email__ = 'rich@kde.org'
+__version__ = "0.0.4"
+__author__ = "Richard J. Moore"
+__email__ = "rich@kde.org"
 
 
 # List all the probes we have
@@ -317,34 +317,38 @@ probes = [
     NPNNotNull12PFS(),
     TACKNotNull(),
     TACKNotNull12(),
-    TACKNotNull12PFS()
+    TACKNotNull12PFS(),
 ]
+
 
 def run_one_probe(ipaddress, port, starttls, specified_probe):
     for probe in probes:
         if specified_probe != type(probe).__name__:
             continue
 
-        logging.info('Probing... %s', type(probe).__name__)
+        logging.info("Probing... %s", type(probe).__name__)
         return {type(probe).__name__: probe.probe(ipaddress, port, starttls)}
+
 
 def probe(ipaddress, port, starttls):
 
     results = {}
 
     for probe in probes:
-        logging.info('Probing... %s', type(probe).__name__)
+        logging.info("Probing... %s", type(probe).__name__)
         result = probe.probe(ipaddress, port, starttls)
         results[type(probe).__name__] = result
 
     return results
 
+
 def list_probes():
     for probe in probes:
         if type(probe).__doc__ is None:
-            print (type(probe).__name__)
+            print(type(probe).__name__)
         else:
-            print ('%s: %s' % (type(probe).__name__, type(probe).__doc__))
+            print("%s: %s" % (type(probe).__name__, type(probe).__doc__))
+
 
 def probe_strength(db, raw_scores):
     # return how diverse are the expected results of probes in the
@@ -356,8 +360,9 @@ def probe_strength(db, raw_scores):
         max_score = (None, 0)
 
     # fingerprints that have the same, best, score
-    tied_fingerprints = set(name for name, val in raw_scores.items()
-                            if val == max_score[1])
+    tied_fingerprints = set(
+        name for name, val in raw_scores.items() if val == max_score[1]
+    )
     probe_matches = {}
     probe_presence = {}
     for fingerprint in db:
@@ -365,7 +370,7 @@ def probe_strength(db, raw_scores):
             probe_matches.setdefault(probe_name, set()).add(probe_result)
             if probe_name not in probe_presence:
                 probe_presence[probe_name] = 0
-            if fingerprint.metadata['Description'] in tied_fingerprints:
+            if fingerprint.metadata["Description"] in tied_fingerprints:
                 probe_presence[probe_name] += 2
             else:
                 probe_presence[probe_name] += 1
@@ -373,8 +378,11 @@ def probe_strength(db, raw_scores):
     max_len = max(len(val) for val in probe_matches.values())
     max_hits = max(probe_presence.values())
 
-    return dict((name, len(val) / max_len * probe_presence.get(name, 0) / max_hits)
-                for name, val in probe_matches.items())
+    return dict(
+        (name, len(val) / max_len * probe_presence.get(name, 0) / max_hits)
+        for name, val in probe_matches.items()
+    )
+
 
 def quick_probe(ipaddress, port, starttls, db):
     # try to as quickly as possible reach 10 matching probes
@@ -387,10 +395,13 @@ def quick_probe(ipaddress, port, starttls, db):
         # get list of probes that are most likely to provide unique
         # response from server
         scored_probes = probe_strength(filtered_db, raw_scores)
-        probes_iter = (name for name, _ in
-                       sorted(scored_probes.items(), key=itemgetter(1),
-                              reverse=True)
-                       if name not in results)
+        probes_iter = (
+            name
+            for name, _ in sorted(
+                scored_probes.items(), key=itemgetter(1), reverse=True
+            )
+            if name not in results
+        )
         # run probes against target until we get at least one match
         for best_probe in probes_iter:
             results.update(run_one_probe(ipaddress, port, starttls, best_probe))
@@ -406,50 +417,93 @@ def quick_probe(ipaddress, port, starttls, db):
             break
         # in next iteration look for best probes given the already matching
         # libraries (to try breaking ties)
-        filtered_db = [fp for fp in db
-                       if fp.description() in raw_scores]
+        filtered_db = [fp for fp in db if fp.description() in raw_scores]
 
     return results
 
 
 def main():
-    options = OptionParser(usage='%prog server [options]',
-                           description='A tool to fingerprint SSL/TLS servers')
-    options.add_option('-p', '--port',
-                       type='int', default=443,
-                       help='TCP port to test (default: 443)')
-    options.add_option('-m', '--matches', dest='matches',
-                       type='int', default=0,
-                       help=('Only display the first N matching scores'
-                             '(default: 0 which displays them all)') )
-    options.add_option('-d', '--debug', action='store_true', dest='debug',
-                       default=False,
-                       help='Print debugging messages')
-    options.add_option( '-s', '--starttls', dest='starttls',
-                       type='choice', action='store', default='auto',
-                       choices=['auto','smtp','ftp','pop3','imap','none'],
-                       help=('Enable a starttls mode. '
-                             'The available modes are: auto, smtp, ftp, pop3, imap, none') )
-    options.add_option('-t', '--probe', dest='probe',
-                       type='string',
-                       help='Run the specified probe')
-    options.add_option('-a', '--add', dest='add', type='string',
-                       help='Add the specified fingerprint to the database')
-    options.add_option('-l', '--list', dest='list', action='store_true',
-                       help='List the fingerprints of the target')
-    options.add_option('--list-probes', dest='list_probes', action='store_true',
-                       help='List the available probes')
-    options.add_option('-n', '--thorough', dest='thorough',
-                       action='store_true',
-                       help="Run all probes against target, don't perform a "
-                            "quick scan")
-    options.add_option('-v', '--version', dest='version', action='store_true',
-                       help='Display the version information')
+    options = OptionParser(
+        usage="%prog server [options]",
+        description="A tool to fingerprint SSL/TLS servers",
+    )
+    options.add_option(
+        "-p", "--port", type="int", default=443, help="TCP port to test (default: 443)"
+    )
+    options.add_option(
+        "-m",
+        "--matches",
+        dest="matches",
+        type="int",
+        default=0,
+        help=(
+            "Only display the first N matching scores"
+            "(default: 0 which displays them all)"
+        ),
+    )
+    options.add_option(
+        "-d",
+        "--debug",
+        action="store_true",
+        dest="debug",
+        default=False,
+        help="Print debugging messages",
+    )
+    options.add_option(
+        "-s",
+        "--starttls",
+        dest="starttls",
+        type="choice",
+        action="store",
+        default="auto",
+        choices=["auto", "smtp", "ftp", "pop3", "imap", "none"],
+        help=(
+            "Enable a starttls mode. "
+            "The available modes are: auto, smtp, ftp, pop3, imap, none"
+        ),
+    )
+    options.add_option(
+        "-t", "--probe", dest="probe", type="string", help="Run the specified probe"
+    )
+    options.add_option(
+        "-a",
+        "--add",
+        dest="add",
+        type="string",
+        help="Add the specified fingerprint to the database",
+    )
+    options.add_option(
+        "-l",
+        "--list",
+        dest="list",
+        action="store_true",
+        help="List the fingerprints of the target",
+    )
+    options.add_option(
+        "--list-probes",
+        dest="list_probes",
+        action="store_true",
+        help="List the available probes",
+    )
+    options.add_option(
+        "-n",
+        "--thorough",
+        dest="thorough",
+        action="store_true",
+        help="Run all probes against target, don't perform a " "quick scan",
+    )
+    options.add_option(
+        "-v",
+        "--version",
+        dest="version",
+        action="store_true",
+        help="Display the version information",
+    )
 
     opts, args = options.parse_args()
 
     if opts.version:
-        print ('TLS Prober version %s, %s <%s>' % (__version__, __author__, __email__))
+        print("TLS Prober version %s, %s <%s>" % (__version__, __author__, __email__))
         return
 
     if opts.list_probes:
@@ -469,24 +523,24 @@ def main():
     elif opts.add or opts.thorough:
         results = probe(args[0], opts.port, opts.starttls)
     else:
-        print ('Running quick scan, results may be unreliable...')
+        print("Running quick scan, results may be unreliable...")
         db = probe_db.read_database()
         results = quick_probe(args[0], opts.port, opts.starttls, db)
 
     # Add a fingerprint to the db
     if opts.add:
         filename = probe_db.add_fingerprint(opts.add, results)
-        print ('Added %s to the database' % opts.add)
-        print ('The fingerprint is located at:', filename)
-        print ('Please submit your new fingerprint for inclusion in the next release!')
+        print("Added %s to the database" % opts.add)
+        print("The fingerprint is located at:", filename)
+        print("Please submit your new fingerprint for inclusion in the next release!")
         return
-    
+
     # Print the results of the probe
     if opts.list:
         for key, val in sorted(results.items()):
-            print ('%24s:\t%s' % (key, val))
+            print("%24s:\t%s" % (key, val))
         return
-    
+
     # Print the matches
     matches = probe_db.find_matches(results)
     count = 0
@@ -499,7 +553,8 @@ def main():
             if count > opts.matches:
                 break
 
-        print("{0:>65}: {1:6.2f}%".format(server, score*100))
+        print("{0:>65}: {1:6.2f}%".format(server, score * 100))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
